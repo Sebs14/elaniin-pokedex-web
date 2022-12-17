@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 import {MdOutlineCatchingPokemon} from 'react-icons/md'
 
-const Navbar = () => {
+const Navbar = ({first, second, third, first_ref, second_ref, third_ref}) => {
     const [nav, setNav] = useState(false)
     const [color, setColor] = useState('transparent')
     const [colorText, setColorText] = useState('white')
@@ -28,20 +28,20 @@ const Navbar = () => {
 
   return (
     <div style={{backgroundColor: `${color}`}} className='fixed left-0 top-0 w-full z-10 ease-in duration-300'>
-        <div className='max-w-[1240px] m-auto flex justify-between items-center p-4 text-white'>
-            <Link href='/' className='flex text-4xl justify-center items-center space-x-3'>
-                <h1 style={{color: `${colorText}`}} className='font-bold flex'>Pokedex</h1>
+        <div className='max-w-[1240px] m-auto flex justify-between items-center p-4'>
+            <Link style={{color: `${colorText}`}} href='/' className='flex text-4xl justify-center items-center space-x-3'>
+                <h1 className='font-bold flex'>Pokedex</h1>
                 <MdOutlineCatchingPokemon/>
             </Link>
             <ul className='hidden sm:flex '>
                 <li style={{color: `${colorText}`}} className='p-4'>
-                    <Link href='/' className='hover:text-red-300'>Home</Link>
+                    <Link href={first_ref} className='hover:text-red-300'>{first}</Link>
                 </li>
                 <li style={{color: `${colorText}`}} className='p-4'>
-                    <Link href='/#aboutme' className='hover:text-red-300'>About us</Link>
+                    <Link href={second_ref} className='hover:text-red-300'>{second}</Link>
                 </li>
                 <li style={{color: `${colorText}`}} className='p-4 '>
-                    <Link href='/Login' className='hover:text-red-300'>Log In / Sign in</Link>
+                    <a href={third_ref} className='hover:text-red-300'>{third}</a>
                 </li>
             </ul>
 

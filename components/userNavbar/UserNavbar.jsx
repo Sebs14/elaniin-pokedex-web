@@ -5,7 +5,7 @@ import {MdOutlineCatchingPokemon} from 'react-icons/md'
 import {IoLogOut} from 'react-icons/io5'
 
 
-const UserNavbar = ({colorPage, colorText, first, second, third, first_ref, second_ref, third_ref, image, alt, name, clickFour}) => {
+const UserNavbar = ({colorPage, colorText, first, second, third, first_ref, second_ref, third_ref, image, alt, clickFour}) => {
     const [nav, setNav] = useState(false)
     const [color, setColor] = useState('transparent')
 
@@ -43,7 +43,7 @@ const UserNavbar = ({colorPage, colorText, first, second, third, first_ref, seco
                     <a href={third_ref} className='hover:text-red-300 font-bold'>{third}</a>
                 </li>
                 <div className='flex items-center space-x-2'>
-                    <p className='font-bold'>{name}</p>
+                    
                     <img src={image} className="h-10 rounded-full" alt={alt}/>
                 </div>
                 <li style={{color: `${colorText}`}} className='p-4 '>

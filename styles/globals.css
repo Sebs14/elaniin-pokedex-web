@@ -15,3 +15,8 @@ html {
 
 .login_img_section {
   background: linear-gradient(rgba(2,2,2,.7),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1577583113753-ca7e95d1bdc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80') center center;}
+
+
+  .custom-bg-charizard {
+    background-image: url('https://images.unsplash.com/photo-1640271443625-3276ed8f62b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+  }

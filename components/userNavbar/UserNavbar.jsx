@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react'
 import Link from 'next/link'
 import {AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 import {MdOutlineCatchingPokemon} from 'react-icons/md'
+import {IoLogOut} from 'react-icons/io5'
 
-const Navbar = ({colorPage, colorText, first, second, third, first_ref, second_ref, third_ref, fourth, fourth_ref}) => {
+
+const UserNavbar = ({colorPage, colorText, first, second, third, first_ref, second_ref, third_ref, image, alt, name, clickFour}) => {
     const [nav, setNav] = useState(false)
     const [color, setColor] = useState('transparent')
 
@@ -30,18 +32,24 @@ const Navbar = ({colorPage, colorText, first, second, third, first_ref, second_r
                 <h1 className='font-bold flex'>Pokedex</h1>
                 <MdOutlineCatchingPokemon/>
             </Link>
-            <ul className='hidden sm:flex '>
+            <ul className='hidden sm:flex md:items-center '>
                 <li style={{color: `${colorText}`}} className='p-4'>
-                    <Link href={first_ref} className='hover:text-red-300'>{first}</Link>
+                    <Link href={first_ref} className='hover:text-red-300 font-bold'>{first}</Link>
                 </li>
                 <li style={{color: `${colorText}`}} className='p-4'>
-                    <Link href={second_ref} className='hover:text-red-300'>{second}</Link>
+                    <Link href={second_ref} className='hover:text-red-300 font-bold'>{second}</Link>
                 </li>
                 <li style={{color: `${colorText}`}} className='p-4 '>
-                    <a href={third_ref} className='hover:text-red-300'>{third}</a>
+                    <a href={third_ref} className='hover:text-red-300 font-bold'>{third}</a>
                 </li>
+                <div className='flex items-center space-x-2'>
+                    <p className='font-bold'>{name}</p>
+                    <img src={image} className="h-10 rounded-full" alt={alt}/>
+                </div>
                 <li style={{color: `${colorText}`}} className='p-4 '>
-                    <a href={fourth_ref} className='hover:text-red-300'>{fourth}</a>
+                    <div onClick={clickFour} className='flex justify-center items-center hover:text-red-300 space-x-2'>
+                        <IoLogOut size={25}/>       
+                    </div>
                 </li>
             </ul>
 
@@ -70,4 +78,4 @@ const Navbar = ({colorPage, colorText, first, second, third, first_ref, second_r
   )
 }
 
-export default Navbar
+export default UserNavbar

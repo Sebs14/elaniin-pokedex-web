@@ -7,8 +7,10 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "./firebase";
+import { useRouter } from "next/router"
 
 const UserContext = createContext();
+// const router = useRouter()
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
@@ -29,6 +31,9 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      // if(!currentUser){
+      //   router.replace("/")
+      // }
       console.log('user', currentUser)
     });
     return () => {

@@ -1,7 +1,7 @@
 import Hero from "../components/hero/Hero";
 import Login from "../components/Login/Login";
 import Navbar from "../components/Navbar/Navbar";
-import React, { useContext } from "react";
+import React from "react";
 
 export default function Home() {
   

@@ -2,13 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import UserNavbar from "../components/userNavbar/UserNavbar";
 import Regions from "../components/regions/Regions";
 import { useRouter } from "next/router";
-import { UserAuth } from "./UserContext";
-
+import { UserAuth } from "../context/UserContext";
 import fetchPokemon from "../services/fetchPokemon";
 import PokemonCard from "../components/card/PokemonCard";
 import PrevButton from "../components/prevButton/prevButton";
 import NextButton from "../components/nextButton/nextButton";
 import fetchRegion from "../services/fetchRegion";
+
 
 const menu = () => {
   const router = useRouter();
@@ -19,6 +19,7 @@ const menu = () => {
   const [offset, setOffset] = useState(0);
   const [ids, setIds] = useState([]);
 
+  //pages navigation on each region
   const nextClick = async () => {
     setOffset((prev) => prev + 10);
   };
@@ -27,13 +28,15 @@ const menu = () => {
     setOffset((prev) => prev - 10);
   };
 
+  //gets pokemons from Region we selected
   const fetchPokemons = async () => {
     const {pokemon, total} = await fetchPokemon(region, offset);
     setFetched(pokemon);
     setPokemonCount(total);
-    console.log("fetch pokemons", total);
+    console.log("fetch pokemons", pokemon);
   };
 
+  //get the region we are at the moment
   const handleRegion = async (e) => {
     setOffset(0)
     const regionURL = e.target.value;
@@ -41,12 +44,10 @@ const menu = () => {
     console.log(regionURL);
   };
 
-  
-
+  //signOut user from firebase
   const handleSignOut = async () => {
     try {
       await logOut();
-      // router.replace("/");
     } catch (error) {
       console.log(error);
     }
@@ -77,11 +78,12 @@ const menu = () => {
         colorPage="black"
         colorText="white"
         first_ref="/menu/#regions"
-        second_ref="/"
+        second_ref="/teams"
         third_ref="/#login"
         first="Regions"
+        second="teams"
         image={user?.photoURL}
-        alt={user?.displayName + " photo"}
+        alt={user?.displayName}
         clickFour={handleSignOut}
       />
       <Regions />
@@ -111,6 +113,7 @@ const menu = () => {
                 pokeImg={fetched.sprites.front_default}
                 id={fetched.id}
                 name={fetched.name}
+                types={fetched.types}
                 habilidades={fetched.abilities}
               />
             ))

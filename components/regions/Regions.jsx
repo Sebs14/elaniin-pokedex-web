@@ -1,5 +1,5 @@
 import React from "react";
-import { UserAuth } from "../../pages/UserContext";
+import { UserAuth } from "../../context/UserContext";
 
 const Regions = () => {
   const { user } = UserAuth()

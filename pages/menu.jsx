@@ -7,6 +7,7 @@ import fetchPokemon from "../services/fetchPokemon";
 import PokemonCard from "../components/card/PokemonCard";
 import NextButton from "../components/nextButton/nextButton";
 import fetchRegion from "../services/fetchRegion";
+import SaveButton from './../components/saveButton/SaveButton';
 
 
 const menu = () => {
@@ -94,7 +95,7 @@ const menu = () => {
       />
       <Regions />
       <form>
-        <div className="flex flex-row items-start gap-10 pl-40 my-5  ">
+        <div className="flex flex-row items-center justify-center gap-10 my-5  ">
          <div>
            <label
             htmlFor="name"
@@ -139,8 +140,11 @@ const menu = () => {
             placeholder="Description"
             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
           />
-         </div>
-        </div>  
+          </div>
+          </div>  
+          <div className="flex justify-center font-bold font-sourceSans text-xl">
+            <SaveButton text="Save Team" />
+          </div>
         <div className="flex justify-center space-x-10 text-black mt-10">
           {ids.length > 0
             ? ids.map((ids) => {
@@ -172,6 +176,7 @@ const menu = () => {
               ))
             : "no hay pokemones"}
         </div>
+        
       </form>
       <div className="flex justify-between">
         {offset > 0 ? <NextButton text="next" click={prevClick} /> : <NextButton text="previous" />}

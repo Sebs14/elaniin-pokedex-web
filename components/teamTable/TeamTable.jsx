@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import List from "../list/List";
+import Link from "next/link"
 import { db } from "../../config/firebase";
 import { query, collection, onSnapshot } from "firebase/firestore";
+import Lottie from "lottie-react";
+import Squirtle from "../../assets/squirtle.json"
 
 const TeamTable = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -34,7 +37,15 @@ const TeamTable = () => {
           ? pokemons.map((pokemon) => (
               <List key={pokemon.name} team={pokemon} />
             ))
-          : "no hay teams maldito puto"}
+          : 
+          <div className="flex flex-col h-[75vh] justify-center items-center">
+            <Link href={"/menu"}>
+              <Lottie animationData={Squirtle} className="mr-5 h-96"/>
+            </Link>
+            <h1 className="text-center font-bold text-3xl font-sourceSans">It seems that there is no team yet</h1>
+            <p className=" font-bold font-sourceSans text-xl" >go create one now, just click me!</p>
+          </div>
+        }
       </div>
     </div>
   );

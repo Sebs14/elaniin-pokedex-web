@@ -1,19 +1,33 @@
 import React from "react";
 import {AiOutlinePlus, AiOutlineMinus} from "react-icons/ai"
-
-const PokemonCard = ({id, name, habilidades, pokeImg}) => {
+import TypeBadge from "../badge/TypeBadge";
+const PokemonCard = ({ name, habilidades, types, pokeImg}) => {
   
+  if(!pokeImg){
+    console.log("poke img", name, pokeImg)
+  }
+
   return (
     <div>
       <div className="mt-10 mb-10 flex justify-center items-center">
         <div className=" p-6 bg-white rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all transform duration-500">
-          <img
+          {pokeImg ? <img
             className="w-64 object-cover rounded-t-md"
             src={pokeImg}
-            alt={name}
-          />
+            alt={name} 
+          /> : <img
+          className="w-64 object-cover rounded-t-md"
+          src={"../../assets/whos_that.png"}
+          alt={name} 
+        />}
           <div className="mt-4">
             <h1 className="text-2xl font-bold text-gray-700 capitalize">{name}</h1>
+            <div className="flex gap-2">
+             {types.map((type) => (
+              <TypeBadge key={type.type.name} type={type.type.name} >{type.type.name}</TypeBadge>
+              ))
+            }
+            </div>
              <div className="flex gap-2">
              {habilidades.map((habilidad) => (
               <span key={habilidad.ability.name} className="text-sm mt-2 text-gray-700">{habilidad.ability.name}</span>

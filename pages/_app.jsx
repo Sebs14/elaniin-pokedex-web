@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import Head from "next/head";
-import { AuthContextProvider } from "./UserContext";
-import { useState, useMemo} from 'react';
+import { AuthContextProvider } from "../context/UserContext";
 
 function MyApp({ Component, pageProps }) {
 

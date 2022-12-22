@@ -3,6 +3,8 @@ import Link from 'next/link'
 import {AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 import {MdOutlineCatchingPokemon} from 'react-icons/md'
 import {IoLogOut} from 'react-icons/io5'
+import Lottie from "lottie-react";
+import Pokeball from "../../assets/pokeball.json"
 
 
 const UserNavbar = ({colorPage, colorText, first, second, third, first_ref, second_ref, third_ref, image, alt, clickFour}) => {
@@ -30,7 +32,7 @@ const UserNavbar = ({colorPage, colorText, first, second, third, first_ref, seco
         <div className='max-w-[1240px] m-auto flex justify-between items-center p-4'>
             <Link style={{color: `${colorText}`}} href='/' className='flex text-4xl justify-center items-center space-x-3'>
                 <h1 className='font-bold flex'>Pokedex</h1>
-                <MdOutlineCatchingPokemon/>
+                <Lottie animationData={Pokeball} loop={false} className="h-10" />
             </Link>
             <ul className='hidden sm:flex md:items-center '>
                 <li style={{color: `${colorText}`}} className='p-4'>

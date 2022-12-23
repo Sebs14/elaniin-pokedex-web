@@ -1,14 +1,16 @@
 import React from "react";
+import TypeBadge from "../badge/TypeBadge";
 
-const ListRow = ({pokemon}) => {
+const ListRow = ({ pokemon }) => {
+  console.log("list row", pokemon);
   return (
     <div>
-      <li className="py-3 sm:py-4">
+      <li>
         <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">
             <img
               className="h-20 w-20 rounded-full"
-              src={pokemon.sprite}
+              src={pokemon.sprites.front_default}
               alt="Neil image"
             />
           </div>
@@ -18,11 +20,16 @@ const ListRow = ({pokemon}) => {
             </p>
             <div className="flex gap-3">
               {pokemon.types.map((type) => (
-                <span key={type} className="text-sm text-gray-500 truncate ">
-                  {type}
-                </span>
+                <TypeBadge type={type.type.name} key={type} />
               ))}
             </div>
+          </div>
+          <div>
+            <p>
+              {pokemon.stats[0].stat.name}: {pokemon.stats[0].base_stat}{" "}
+              <br></br> {pokemon.stats[1].stat.name}:{" "}
+              {pokemon.stats[1].base_stat}
+            </p>
           </div>
         </div>
       </li>

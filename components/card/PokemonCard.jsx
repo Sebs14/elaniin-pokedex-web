@@ -1,7 +1,7 @@
 import React from "react";
 import {AiOutlinePlus, AiOutlineMinus} from "react-icons/ai"
 import TypeBadge from "../badge/TypeBadge";
-const PokemonCard = ({ name, habilidades, types, pokeImg}) => {
+const PokemonCard = ({ name, habilidades, types, pokeImg, click, classes}) => {
   
   if(!pokeImg){
     console.log("poke img", name, pokeImg)
@@ -36,10 +36,7 @@ const PokemonCard = ({ name, habilidades, types, pokeImg}) => {
             </div>
             <div className="mt-3 space-x-4 flex p-1">
               <div className="p-1 border-4 rounded-full cursor-pointer hover:border-green-200 hover:scale-105 transition transform duration-200">
-                <span className=" h-6 w-6 bg-green-400 rounded-full flex items-center justify-center"><AiOutlinePlus/></span>
-              </div>
-              <div className="p-1 border-4 rounded-full cursor-pointer hover:border-blue-200 hover:scale-105 transition transform duration-200">
-                <span className=" h-6 w-6 bg-blue-400 rounded-full flex items-center justify-center"><AiOutlineMinus/></span>
+                <span onClick={click} className={classes}><AiOutlinePlus/></span>
               </div>
             </div>
           </div>

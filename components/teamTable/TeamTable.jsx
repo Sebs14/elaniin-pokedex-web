@@ -1,53 +1,77 @@
 import React, { useState, useEffect } from "react";
 import List from "../list/List";
 import Link from "next/link"
-import { db } from "../../config/firebase";
-import { query, collection, onSnapshot } from "firebase/firestore";
+import Pikachu from "../../assets/pikachu.json"
 import Lottie from "lottie-react";
 import Squirtle from "../../assets/squirtle.json"
+import { db } from "../../config/firebase";
+import { get, ref, remove } from "firebase/database";
+import { auth } from "../../config/firebase";
 
 const TeamTable = () => {
-  const [pokemons, setPokemons] = useState([]);
+  
+  const dbRef = ref(db, "teams")
+  const [teams, setTeams] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   //read teams from firebase
 
-  // useEffect(() => {
-  //   const q = query(collection(db, "teams"));
-  //   setIsLoading(true);
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //     const pokemonArr = [];
-  //     querySnapshot.forEach((doc) => {
-  //       pokemonArr.push({ ...doc.data(), id: doc.id });
-  //     });
-  //     setPokemons(pokemonArr);
-  //     setIsLoading(false);
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
 
-  console.log("hola", pokemons);
+  const handleDelete = async (id) => {
+    
+    const refTeamById = ref(db, "teams/" + id) 
+    
+    console.log(refTeamById)
+
+    remove(refTeamById)
+  }
+  
+  useEffect(() => {
+    setIsLoading(true);
+    get(dbRef).then((snapshot) =>{
+      if(snapshot.exists()) {
+        const mappedTeams = Object.entries(snapshot.val()).filter(([key, value]) => value.owner == auth.currentUser.uid).map(
+          ([key, value]) => ({
+            id:key,
+            ...value,
+          })
+          )
+          setTeams(mappedTeams)
+        }
+        setIsLoading(false);
+      } ).catch((e) => {
+        setIsLoading(false)
+        console.log("hola", e);
+    })
+  }, []);
+
+    console.log(teams)
 
   return (
-    <div className="mt-[10vh] h-screen">
-      <div className="grid mx-20 my-4">
+    <div className="flex justify-center h-screen w-full">
         {isLoading
-          ? "loading ..."
-          : pokemons.length > 0
-          ? pokemons.map((pokemon) => (
-              <List key={pokemon.name} team={pokemon} />
-            ))
+          ? (<div className="flex flex-col h-screen justify-center items-center">
+              <Lottie animationData={Pikachu} />
+            </div>)
+          : teams.length > 0
+          ? <div className="grid grid-cols-1 lg:grid-cols-3">
+            {teams.map((team) => (
+              <div key={team.id} className=" mx-4 mt-24 w-full">
+                <List onDelete={() => handleDelete(team.id)} team={team} />
+              </div>
+            ))}
+          </div>
           : 
           <div className="flex flex-col h-[75vh] justify-center items-center">
             <Link href={"/menu"}>
-              <Lottie animationData={Squirtle} className="mr-5 h-96"/>
+              <Lottie animationData={Squirtle} className="h-96"/>
             </Link>
             <h1 className="text-center font-bold text-3xl font-sourceSans">It seems that there is no team yet</h1>
             <p className=" font-bold font-sourceSans text-xl" >go create one now, just click me!</p>
           </div>
         }
-      </div>
     </div>
+    
   );
 };
 

@@ -5,7 +5,6 @@
         return data.json();
       }
     );
-    console.log("hola",response)
     return response
     } catch (error) {
         

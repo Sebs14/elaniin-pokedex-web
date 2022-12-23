@@ -1,7 +1,9 @@
 import React from "react";
-import TypeBadge from "../badge/TypeBadge";
+import TypeBadge from "../../badge/TypeBadge";
+import {GiTrashCan} from "react-icons/gi"
 
-const ListRow = ({ pokemon }) => {
+
+const ListRow = ({ pokemon, onDelete }) => {
   
   return (
     <div>
@@ -25,11 +27,7 @@ const ListRow = ({ pokemon }) => {
             </div>
           </div>
           <div>
-            <p>
-              {pokemon.stats[0].stat.name}: {pokemon.stats[0].base_stat}{" "}
-              <br></br> {pokemon.stats[1].stat.name}:{" "}
-              {pokemon.stats[1].base_stat}
-            </p>
+            <span onClick={onDelete} className="hover:text-red-600"><GiTrashCan size={25}/></span>
           </div>
         </div>
       </li>

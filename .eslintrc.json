@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["next/core-web-vitals", "airbnb", "plugin:@next/next/recommended", "next"],
+  "extends": ["next/core-web-vitals", "plugin:@next/next/recommended", "next"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -24,6 +24,7 @@
     ],
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "linebreak-style":"off"
   }
 }

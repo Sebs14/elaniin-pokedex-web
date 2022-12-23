@@ -1,30 +1,29 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useRouter } from "next/router";
-import { UserAuth } from "../../context/UserContext";
-import fetchPokemon from "../../services/fetchPokemon";
-import PokemonCard from "../card/PokemonCard";
-import NextButton from "../nextButton/nextButton";
-import fetchRegion from "../../services/fetchRegion";
-import SaveButton from "../saveButton/SaveButton";
-import { push, ref, set } from "firebase/database";
-import { db } from "../../config/firebase";
-import List from "./list/List";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { ref, set } from 'firebase/database';
+import React, { useEffect, useState } from 'react';
+import { UserAuth } from '../../context/UserContext';
+import fetchPokemon from '../../services/fetchPokemon';
+import PokemonCard from '../card/PokemonCard';
+import NextButton from '../nextButton/nextButton';
+import fetchRegion from '../../services/fetchRegion';
+import SaveButton from '../saveButton/SaveButton';
+import { db } from '../../config/firebase';
+import List from './list/List';
+
 
 const menu = ({ teamEdit, onEdit, isEdit }) => {
-  const dbRef = ref(db, "teams")
-  const { user, logOut } = UserAuth();
-  const router = useRouter();
+  const { user } = UserAuth();
   const [pokemonCount, setPokemonCount] = useState(0);
   const [fetched, setFetched] = useState([]);
-  const [region, setRegion] = useState("https://pokeapi.co/api/v2/region/1/");
+  const [region, setRegion] = useState('https://pokeapi.co/api/v2/region/1/');
   const [offset, setOffset] = useState(0);
   const [ids, setIds] = useState([]);
   const [team, setTeam] = useState({
-    name: "",
-    description: "",
+    name: '',
+    description: '',
     pokemons: [],
-    region: "kanto",
-    type: "",
+    region: 'kanto',
+    type: '',
     owner: undefined,
   });
 
@@ -39,26 +38,24 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
     console.log(result);
   };
 
-
-  
   const handleSubmit = async () => {
     console.log({ user });
 
-    const refTeamById = ref(db, `teams/${teamEdit.id}` ) 
+    const refTeamById = ref(db, `teams/${teamEdit.id}`);
 
-    set(refTeamById, teamEdit)
+    set(refTeamById, teamEdit);
 
-    isEdit(false)
+    isEdit(false);
   };
-  
-  const handleAddPokemon = (fetched) => {
+
+  const handleAddPokemon = () => {
     onEdit((prev) => ({
       ...prev,
       pokemons: [...prev.pokemons, fetched],
     }));
   };
 
-  //pages navigation on each region
+  
   const nextClick = async () => {
     setOffset((prev) => prev + 10);
   };
@@ -67,14 +64,14 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
     setOffset((prev) => prev - 10);
   };
 
-  //gets pokemons from Region we selected
+ 
   const fetchPokemons = async () => {
     const { pokemon, total } = await fetchPokemon(region, offset);
     setFetched(pokemon);
     setPokemonCount(total);
   };
 
-  //get the region we are at the moment
+  
   const handleRegion = async (id) => {
     setOffset(0);
     const regionURL = id.url;
@@ -96,6 +93,7 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
 
   useEffect(() => {
     fetchPokemons();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset, region]);
 
   return (
@@ -175,8 +173,8 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
             <SaveButton
               classes={`relative ${
                 teamEdit.pokemons.length < 3
-                  ? "opacity-20 cursor-not-allowed"
-                  : "cursor-pointer"
+                  ? 'opacity-20 cursor-not-allowed'
+                  : 'cursor-pointer'
               } inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group`}
               click={handleSubmit}
               text="Save Team"
@@ -200,7 +198,7 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
               })}
             </div>
           ) : (
-            "no veo resultados"
+            'no veo resultados'
           )}
         </div>
         <div id="pokemons" className="grid lg:grid-cols-5 grid-cols-3">
@@ -210,8 +208,8 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
                   click={() => handleAddPokemon(fetched)}
                   classes={`h-6 w-6 bg-green-400 rounded-full flex items-center justify-center ${
                     teamEdit.pokemons.length === 6
-                      ? "opacity-20 cursor-not-allowed"
-                      : "cursor-pointer"
+                      ? 'opacity-20 cursor-not-allowed'
+                      : 'cursor-pointer'
                   }`}
                   key={fetched.id}
                   pokeImg={fetched.sprites.front_default}
@@ -221,7 +219,7 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
                   habilidades={fetched.abilities}
                 />
               ))
-            : "no hay pokemones"}
+            : 'no hay pokemones'}
         </div>
         <div className="flex justify-between pb-10">
           {offset > 0 ? (

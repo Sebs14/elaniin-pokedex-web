@@ -3,6 +3,7 @@ import UserNavbar from "../components/userNavbar/UserNavbar";
 import { useRouter } from "next/router";
 import { UserAuth } from "../context/UserContext";
 import TeamTable from "../components/teamTable/TeamTable";
+import EditTeam from "../components/editTeam/editTeam";
 
 const teams = () => {
   const { user, logOut } = UserAuth();

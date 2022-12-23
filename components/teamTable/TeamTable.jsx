@@ -7,9 +7,10 @@ import Squirtle from "../../assets/squirtle.json"
 import { db } from "../../config/firebase";
 import { get, ref, remove } from "firebase/database";
 import { auth } from "../../config/firebase";
+import { useRouter } from "next/router";
 
 const TeamTable = () => {
-  
+  const router = useRouter();
   const dbRef = ref(db, "teams")
   const [teams, setTeams] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,9 @@ const TeamTable = () => {
     console.log(refTeamById)
 
     remove(refTeamById)
+    setTimeout(() => {
+      router.push("/menu")
+    }, 500)
   }
   
   useEffect(() => {

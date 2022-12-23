@@ -37,7 +37,7 @@ const menu = () => {
     push(ref(db, "teams/"), {...team,
     owner: user.uid});
     
-    // router.push("/teams");
+    router.push("/teams");
   };
 
   const handleAddPokemon = (fetched) => {

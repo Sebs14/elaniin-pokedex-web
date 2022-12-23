@@ -1,15 +1,15 @@
-import Hero from "../components/hero/Hero";
-import Login from "../components/Login/Login";
-import Navbar from "../components/Navbar/Navbar";
-import React from "react";
+import Hero from '../components/hero/Hero';
+import Login from '../components/login/Login';
+import Navbar from '../components/navbar/Navbar';
+import React from 'react';
 
 export default function Home() {
-  console.log("hola")
+  console.log('hola');
   return (
     <div>
       <Navbar
-        colorPage='black'
-        colorText='white'
+        colorPage="black"
+        colorText="white"
         first_ref="/"
         second_ref="/"
         third_ref="/#login"
@@ -17,7 +17,7 @@ export default function Home() {
         third="Log in / Sign up"
       />
       <Hero />
-      <Login/>
+      <Login />
     </div>
   );
 }

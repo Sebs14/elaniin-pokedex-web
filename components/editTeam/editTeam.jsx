@@ -10,7 +10,7 @@ import { push, ref, set } from "firebase/database";
 import { db } from "../../config/firebase";
 import List from "./list/List";
 
-const menu = ({ teamEdit, onEdit }) => {
+const menu = ({ teamEdit, onEdit, isEdit }) => {
   const dbRef = ref(db, "teams")
   const { user, logOut } = UserAuth();
   const router = useRouter();
@@ -40,15 +40,17 @@ const menu = ({ teamEdit, onEdit }) => {
   };
 
 
-  console.log(teamEdit)
+  
   const handleSubmit = async () => {
     console.log({ user });
 
     const refTeamById = ref(db, `teams/${teamEdit.id}` ) 
 
     set(refTeamById, teamEdit)
-  };
 
+    isEdit(false)
+  };
+  
   const handleAddPokemon = (fetched) => {
     onEdit((prev) => ({
       ...prev,

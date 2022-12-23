@@ -79,7 +79,7 @@ const TeamTable = () => {
           }
       </div>
       {!isEditing ? null :  
-        <EditTeam teamEdit={editTeam} onEdit={setEditTeam} />
+        <EditTeam teamEdit={editTeam} onEdit={setEditTeam} isEdit={setIsEditing} />
       }
     </div>
     

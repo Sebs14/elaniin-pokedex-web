@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ref, set } from 'firebase/database';
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from 'react';
-import { UserAuth } from '../../context/UserContext';
 import fetchPokemon from '../../services/fetchPokemon';
 import PokemonCard from '../card/PokemonCard';
 import NextButton from '../nextButton/nextButton';
@@ -12,7 +12,7 @@ import List from './list/List';
 
 
 const menu = ({ teamEdit, onEdit, isEdit }) => {
-  const { user } = UserAuth();
+  const router = useRouter();
   const [pokemonCount, setPokemonCount] = useState(0);
   const [fetched, setFetched] = useState([]);
   const [region, setRegion] = useState('https://pokeapi.co/api/v2/region/1/');
@@ -28,27 +28,24 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
   });
 
   const handleDeletePokemon = (index) => {
-    console.log(index);
     const result = teamEdit.pokemons;
     result.splice(index, 1);
     onEdit((prev) => ({
       ...prev,
       pokemons: result,
     }));
-    console.log(result);
   };
 
   const handleSubmit = async () => {
-    console.log({ user });
-
     const refTeamById = ref(db, `teams/${teamEdit.id}`);
-
     set(refTeamById, teamEdit);
-
     isEdit(false);
+    // setTimeout(() => {
+    //   router.reload();
+    // }, 500);
   };
 
-  const handleAddPokemon = () => {
+  const handleAddPokemon = (fetched) => {
     onEdit((prev) => ({
       ...prev,
       pokemons: [...prev.pokemons, fetched],
@@ -97,9 +94,13 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
   }, [offset, region]);
 
   return (
-    <div id="edit">
+    <div id="edit" className='h-screen'>
+      <div className="flex items-center px-10 pb-5">
+        <h1 className="font-noto font-bold text-center text-4xl">EDIT TEAM</h1>
+        <div className="w-full h-5 bg-red-600"/>
+      </div>
       <form className="h-screen">
-        <div className="flex  justify-center items-center space-x-10">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-10">
           <div className="flex flex-col  items-center justify-center gap-10 my-5 ">
             <div>
               <label
@@ -183,7 +184,7 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
         </div>
         <div className="flex justify-center space-x-10 text-black mt-10">
           {ids.length > 0 ? (
-            <div className="lg:flex gap-10  grid grid-cols-3">
+            <div className="lg:flex gap-10 grid grid-cols-2 md:grid-cols-5">
               {ids.map((ids) => {
                 return (
                   <p
@@ -201,7 +202,7 @@ const menu = ({ teamEdit, onEdit, isEdit }) => {
             'no veo resultados'
           )}
         </div>
-        <div id="pokemons" className="grid lg:grid-cols-5 grid-cols-3">
+        <div id="pokemons" className="grid justify-center xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3">
           {fetched.length > 0
             ? fetched.map((fetched) => (
                 <PokemonCard

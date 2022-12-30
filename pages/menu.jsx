@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import UserNavbar from "../components/userNavbar/UserNavbar";
 import Regions from "../components/regions/Regions";
 import { useRouter } from "next/router";
@@ -10,7 +10,7 @@ import NextButton from "../components/nextButton/nextButton";
 import fetchRegion from "../services/fetchRegion";
 import SaveButton from "./../components/saveButton/SaveButton";
 import { push, ref } from "firebase/database";
-import { db, auth } from "../config/firebase";
+import { db } from "../config/firebase";
 
 const menu = () => {
   const router = useRouter();
@@ -31,9 +31,6 @@ const menu = () => {
   });
 
   const handleSubmit = async () => {
-    
-    
-    console.log({user})
    
     push(ref(db, "teams/"), {...team,
     owner: user.uid});
@@ -101,6 +98,7 @@ const menu = () => {
   useEffect(() => {
     fetchPokemons();
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset, region]);
 
   if (!user) {
@@ -183,7 +181,7 @@ const menu = () => {
           </div>
         </div>
         <div className="flex justify-center font-bold font-sourceSans text-xl">
-          <SaveButton classes={`relative ${team.pokemons.length < 3 ? "opacity-20 cursor-not-allowed": "cursor-pointer" } inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group`} click={handleSubmit} text="Save Team" />
+          <SaveButton classes={`relative ${team.pokemons.length < 3 || team.description === "" || team.name === "" || team.type === "" ? "hidden": "cursor-pointer" } inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group`} click={handleSubmit} text="Save Team" />
         </div>
         <div className="flex justify-center space-x-10 text-black mt-10">
           {ids.length > 0

@@ -5,7 +5,7 @@ import Pikachu from '../../assets/pikachu.json';
 import Lottie from 'lottie-react';
 import Squirtle from '../../assets/squirtle.json';
 import { db } from '../../config/firebase';
-import { get, ref, remove, set } from 'firebase/database';
+import { get, ref, remove } from 'firebase/database';
 import { auth } from '../../config/firebase';
 import { useRouter } from 'next/router';
 import EditTeam from '../editTeam/editTeam';
@@ -49,13 +49,13 @@ const TeamTable = () => {
       })
       .catch((e) => {
         setIsLoading(false);
-        console.log('hola', e);
+        
       });
   }, []);
 
   return (
     <div>
-      <div className="flex justify-center h-screen w-full">
+      <div className="flex justify-center h-fit pb-10  w-full">
         {isLoading ? (
           <div className="flex flex-col h-screen justify-center items-center">
             <Lottie animationData={Pikachu} />
@@ -68,7 +68,7 @@ const TeamTable = () => {
                   onEdit={() => handleEdit(team)}
                   onDelete={() => handleDelete(team.id)}
                   team={team}
-                />
+                />  
               </div>
             ))}
           </div>

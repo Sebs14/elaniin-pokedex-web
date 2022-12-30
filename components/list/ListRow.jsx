@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import TypeBadge from "../badge/TypeBadge";
 
@@ -8,9 +9,11 @@ const ListRow = ({ pokemon }) => {
       <li>
         <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">
-            <img
+            <Image
+              height={80}
+              width={80}
               className="h-20 w-20 rounded-full"
-              src={pokemon.sprites.front_default}
+              src={pokemon.sprites?.front_default || "../../assets/whos_that.png"}
               alt="Neil image"
             />
           </div>

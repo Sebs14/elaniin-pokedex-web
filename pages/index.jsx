@@ -4,7 +4,6 @@ import Navbar from '../components/navbar/Navbar';
 import React from 'react';
 
 export default function Home() {
-  console.log('hola');
   return (
     <div>
       <Navbar

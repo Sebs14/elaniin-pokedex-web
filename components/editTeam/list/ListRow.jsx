@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import TypeBadge from '../../badge/TypeBadge';
 import { GiTrashCan } from 'react-icons/gi';
 
@@ -8,7 +9,9 @@ const ListRow = ({ pokemon, onDelete }) => {
       <li>
         <div className="flex items-center space-x-4">
           <div className="flex-shrink-0">
-            <img
+            <Image
+              height={80}
+              width={80}
               className="h-20 w-20 rounded-full"
               src={pokemon.sprites.front_default}
               alt="Neil image"

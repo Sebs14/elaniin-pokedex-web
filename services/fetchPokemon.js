@@ -26,10 +26,7 @@ const fetchPokemon = async ( urlFirst, offset) => {
         )
       )
     );
-
-      
-
-    console.log(pokemonEntries.length)
+    
     return {pokemon, total: pokemonEntries.length}
     
   } catch (error) {

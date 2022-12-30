@@ -1,9 +1,9 @@
 import React from "react";
 import ListRow from "./ListRow";
-import Link from "next/link"
 import {GiTrashCan} from "react-icons/gi"
 
 const List = ({team, onDelete, onEdit}) => {
+  
     
   return (
       <div className="bg-sky-100 shadow-xl rounded-lg mb-4 p-4 sm:p-6 h-[625px] md:w-[400px]">
@@ -19,7 +19,7 @@ const List = ({team, onDelete, onEdit}) => {
           </div>
           <div className="flow-root">
             <ul role="list" className="divide-y divide-black/40">
-              {team.pokemons.map((pokemon) => (
+              {team.pokemons?.map((pokemon) => (
                 <ListRow key={pokemon.name} pokemon={pokemon}/>
               ))}
              </ul>

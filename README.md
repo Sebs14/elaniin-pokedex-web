@@ -1,34 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pokedex 🦇 🐺
 
-## Getting Started
+This project it is based on the pokemon world using the pokeAPI and firebase, you can look for pokemons all over this world and filter them by region and create teams with a min of 3 pokemons and a max of 6, once you create them you can look all all your teams at the "teams" page and you can edit them.
 
-First, run the development server:
+## Run Locally
+
+You can download this project by following the next steps, it is simple to use and install
+🙂
+
+Clone the project from latest release on main branch
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://gitlab.com/elaniin2/elaniin-pokedex-web.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+  cd elaniin-pokedex-web
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Install dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+  npm install or npm i
+```
 
-## Learn More
+Start the server as dev
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+in order to make it work you need to config a .env file
+with the firebase URL'S and also the pokeAPI base url
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For the Deployment of this project it has been used Vercel as host
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://elaniin-pokedex-web-five.vercel.app
+
+![vercel](https://mms.businesswire.com/media/20210216006039/en/859393/23/vercel.jpg)
+
+## Support
+
+For support, email sebastian.flores@elaniin.com.
